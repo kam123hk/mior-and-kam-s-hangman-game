@@ -1,40 +1,28 @@
-// function InputGuess() {
-//     return <>user input form for guess</>
-// }
-
-// export default InputGuess
-
 import { useState } from "react";
 
-function InputGuess() {
+function InputGuess({ words, listButtons, postGuess, listGuesses }) {
     const [guess, setGuess] = useState("");
+    const [isDisabled, setIsDisabled] = useState(true)
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        // setGuess("new guess");
-        console.log(event.target[0].value)
-        return event.target[0].value
-        // send guess to countGuess and incorrectGuesses
+        postGuess(guess);
+        setIsDisabled(true);
+        setGuess("");
     }
 
-    // const handleSubmit = (event) => {
-    //     // prevent the form's default submission behaviour
-    //     event.preventDefault();
-    //     // add the newItem to our list in App
-    //     setList((currList) => {
-    //       return [newItem, ...currList];
-    //     });
-    //     // reset the input to be empty
-    //     setNewItem('');
-    //   };
+    const handleChange = (event) => {
+        if (event.target.value !== "" && !listGuesses.includes(event.target.value.toLowerCase()) && event.target.value.length === words.length && event.target.value.toLowerCase().split("").every((letter, index) => {return (listButtons.includes(letter) && words[index] === letter) || !listButtons.includes(words[index])})) setIsDisabled(false)
+        else setIsDisabled(true);
+        setGuess(event.target.value)
+    }
 
     return (
         <form onSubmit={handleSubmit}>
             <label htmlFor="guess"></label>
-            <input id="guess" placeholder="put your guess here" ></input>            
-            <button type="submit">Submit guess</button>
-        </form>
-    )
+            <input id="guess" placeholder="type your guess here" onChange={handleChange} value={guess}></input>            
+            <button disabled={isDisabled} type="submit">Submit guess</button>
+        </form>)
     };
-
     
     export default InputGuess
