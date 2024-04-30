@@ -1,14 +1,14 @@
-function NewGame( { selectNewPhrase }) {
+function NewGame({ selectNewPhrase }) {
+  const handleSubmit2 = (event) => {
+    selectNewPhrase();
+    event.preventDefault();
+  };
 
-    const handleSubmit2 = () => {
-        selectNewPhrase()
-    }
-
-    return (
-        <form onSubmit={handleSubmit2}>
-        <button>Reset</button>
-        </form>
-    )
+  return (
+    <form onSubmit={handleSubmit2}>
+      <button>Reset</button>
+    </form>
+  );
 }
 
-export default NewGame
+export default NewGame;
