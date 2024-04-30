@@ -78,3 +78,7 @@ button:focus-visible {
   width: 32px;
   border-bottom: 5px solid black;
 }
+
+.words-display .space {
+  width: 32px;
+}

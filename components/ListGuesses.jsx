@@ -1,11 +1,11 @@
 function ListGuesses({listGuesses, words}) {
 
     return (
-    <ul>
+    <ol>
         {listGuesses.map((guess, index) => {
-        return guess === words ? <li key={index}>{guess} is correct!</li> : <li key={index}>{guess}</li>
+        return guess === words ? <li key={index}>✅ <strong>{guess}</strong> is correct!</li> : <li key={index}>{guess} ❌</li>
         })}
-    </ul>
+    </ol>
     )
 
 }

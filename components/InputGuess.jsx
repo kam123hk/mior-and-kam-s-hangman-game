@@ -12,7 +12,7 @@ function InputGuess({ words, listButtons, postGuess, listGuesses }) {
     }
 
     const handleChange = (event) => {
-        if (event.target.value !== "" && !listGuesses.includes(event.target.value.toLowerCase()) && event.target.value.length === words.length && event.target.value.toLowerCase().split("").every((letter, index) => {return (listButtons.includes(letter) && words[index] === letter) || !listButtons.includes(words[index])})) setIsDisabled(false)
+        if (!listGuesses.includes(event.target.value.toLowerCase()) && event.target.value.length === words.length && event.target.value.toLowerCase().split("").every((letter, index) => {return (listButtons.includes(letter) && words[index] === letter) || !listButtons.includes(words[index]) && !listButtons.includes(letter) && letter !== " " && words[index] !== " " || words[index] === " " && letter === " "}) ) setIsDisabled(false)
         else setIsDisabled(true);
         setGuess(event.target.value)
     }

@@ -5,12 +5,19 @@ import ListGuesses from '../components/ListGuesses'
 import InputGuess from '../components/InputGuess'
 import Buttons from '../components/Buttons'
 import WordsDisplay from '../components/WordsDisplay'
+// import { phrases } from './phrases.json'
+import NewGame from '../components/NewGame'
 
 function App() {
-  // const [count, setCount] = useState(0)
+
+  // const phrasesArray = [];
+  // phrases.forEach((phrase, index) => {
+  //   phrasesArray.splice(Math.floor(Math.random()*(index+1)), 0, phrase)
+  // })
+
   const [listGuesses, setListGuesses] = useState([]);
   const [listButtons, setListButtons] = useState([]);
-  const [words, setWords] = useState('banter');
+  const [listPhrases, setListPhrases] = useState(['first', 'second phrase', 'third phr', 'fourth', 'fifth words', 'sixth ones']);
 
   const postGuess = (guess) => {
     setListGuesses(currentListGuesses => {
@@ -24,15 +31,22 @@ function App() {
     })
   }
 
+  const selectNewPhrase = () => {    
+    setListPhrases(currentListPhrases => {
+      return currentListPhrases.slice(1);
+    })
+  }
+
   return (
     <>
-    <WordsDisplay words={words} listButtons={listButtons}/>
+    <WordsDisplay words={listPhrases[0]} listButtons={listButtons}/>
     <CountGuess listGuesses={listGuesses} listButtons={listButtons}/>
     <p>
     <Buttons postButton={postButton}/>
     </p>
-    <InputGuess words={words} listButtons={listButtons} postGuess={postGuess} listGuesses={listGuesses}/>
-    <ListGuesses listGuesses={listGuesses} words={words}/>
+    <InputGuess words={listPhrases[0]} listButtons={listButtons} postGuess={postGuess} listGuesses={listGuesses}/>
+    <ListGuesses listGuesses={listGuesses} words={listPhrases[0]}/>
+    <NewGame selectNewPhrase={selectNewPhrase} />
     </>
   )
 }
